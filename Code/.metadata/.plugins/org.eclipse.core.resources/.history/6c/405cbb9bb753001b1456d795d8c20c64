@@ -1,0 +1,29 @@
+package library;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class BookDAO {
+
+	private final String url;
+	private final String username;
+	private final String password;
+	
+	public BookDAO(String url, String username, String password) {
+		this.url = url;
+		this.username = username;
+		this.password = password;
+	}
+	
+	private Connection getConnection() throws SQLException {
+		final String driver = "com.mysql.cj.jdbc.Driver";
+		
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return DriverManager.getConnection(url, username, password);
+	}
+}
